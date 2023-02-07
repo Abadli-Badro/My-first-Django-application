@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  {% load static %}
+  <head>
+    <title>Produits</title>
+  </head>
+
+  <body>
+    {% include 'header.html' %}
+    <section>
+      <h1 class="items-list-title">Produits:</h1>
+      <div class="d-flex justify-content-between pt-2 pb-5">
+        <div class="d-flex justify-content-between">
+          <form
+            method="post"
+            class="col-auto"
+            action="{% url 'Chercher_produit' %}"
+          >
+            {% csrf_token %}
+            <input
+              type="search"
+              name="produit_chercher"
+              class="col-auto btn btn-light"
+              placeholder="Chercher un produit"
+            />
+            <button class="btn btn-info col-auto" type="submit">
+              Chercher
+            </button>
+          </form>
+          <form class="col-auto" method="get">
+            {% csrf_token %} {{products.form}}
+            <button class="btn btn-success" type="submit">Filter</button>
+          </form>
+        </div>
+        <div>
+          <a class="col-auto" href="{% url 'ExpProdCSV' %}">
+            <button class="btn btn-outline-primary btn-light">
+              Export(CSV)
+            </button></a
+          >
+          <a
+            class="col-auto col-auto-offset-9"
+            href="{% url 'Ajouter_produit' %}"
+            ><button class="btn btn-primary btn-outline-light">
+              + Ajouter
+            </button></a
+          >
+        </div>
+      </div>
+      <hr />
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Category</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Supprimer</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products.qs %}
+          <tr>
+            <td>{{ product.Nom_produit }}</td>
+            <td>{{ product.Type_produit }}</td>
+            <td>
+              <a href="{% url 'Edit_produit' product.id %}">Modifier</a>
+            </td>
+            <td>
+              <a href="{% url 'Supp_produit' product.id %}">Supprimer</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </body>
+</html>

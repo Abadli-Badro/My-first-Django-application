@@ -1,0 +1,153 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg text-light shadow">
+      <a class="navbar-brand px-4 text-light" href="/home">Nomad Store</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav list-unstyled">
+          <li class="nav-item navlink">
+            <a
+              href="{% url 'ClientList' %}"
+              class="text-light p-4 navlink"
+              href="#"
+              >Clients</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="{% url 'ProdList' %}"
+              class="text-light p-4 navlink"
+              href="#"
+              >Produits</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="{% url 'TypeList' %}"
+              class="text-light p-4 navlink"
+              href="#"
+              >Types produits</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="{% url 'FournisseursList' %}"
+              class="text-light p-4 navlink"
+              href="#"
+              >Fournisseurs</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="sidenav text-light">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <a
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="false"
+            aria-controls="collapseOne"
+          >
+            Dashboard
+          </a>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse show"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
+        >
+          <a href="{% url 'Best_Clients' %}" class="accordion-body acc-side"
+            >Top Clients</a
+          >
+          <a
+            href="{% url 'Best_Fournisseurs' %}"
+            class="accordion-body acc-side"
+            >Top Fournisseurs</a
+          >
+          <a href="{% url 'Best_Products' %}" class="accordion-body acc-side"
+            >Top Produits</a
+          >
+          <a
+            href="{% url 'evolution_benefice' %}"
+            class="accordion-body acc-side"
+            >Evolution Benefice</a
+          ><a
+            href="{% url 'evolution_valeur' %}"
+            class="accordion-body acc-side"
+            >Evolution Valeur</a
+          ><a href="{% url 'evolution_achat' %}" class="accordion-body acc-side"
+            >Evolution Achat</a
+          ><a
+            href="{% url 'produit_plusAchete' %}"
+            class="accordion-body acc-side"
+            >Produit Plus Achete</a
+          >
+        </div>
+      </div>
+      <a href="{% url 'Vente' %}">Vente</a>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <a
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="false"
+            aria-controls="collapseOne"
+          >
+            Achat
+          </a>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse show"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
+        >
+          <a href="{% url 'Bon_commande' %}" class="accordion-body acc-side"
+            >Bon de commande</a
+          >
+          <a href="{% url 'Bon_livraison' %}" class="accordion-body acc-side"
+            >Bon de livraison</a
+          >
+          <a href="{% url 'Facture' %}" class="accordion-body acc-side"
+            >Facture</a
+          >
+          <a href="{% url 'Réglements_achat' %}" class="accordion-body acc-side"
+            >Réglements</a
+          >
+        </div>
+      </div>
+      <a href="{% url 'Stock' %}">Stock</a><br />
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

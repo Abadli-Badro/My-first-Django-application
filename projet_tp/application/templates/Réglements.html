@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  {% load static %}
+  <head>
+    <title>Reglement</title>
+  </head>
+
+  <body>
+    {% include 'header.html' %}
+    <section>
+      <h1 class="items-list-title">Reglement:</h1>
+      <div class="d-flex justify-content-between pt-2 pb-5">
+        <form method="get">
+          {% csrf_token %} {{fournisseurs.form}}
+          <button class="btn btn-success" type="submit">Filter</button>
+        </form>
+      </div>
+      <hr />
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Fournisseur</th>
+            <th scope="col">Solde</th>
+            <th scope="col">Regler</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for fournisseur in fournisseurs.qs %} 
+          {% if fournisseur.Solde_Fournisseur > 0 %}
+          <tr>
+            <td>{{ fournisseur.Nom_Fournisseur }}</td>
+            <td>{{fournisseur.Solde_Fournisseur}}</td>
+            <td>
+              <a href="{% url 'Régler' fournisseur.id %}">Régler</a>
+            </td>
+          </tr>
+          {% endif%}
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body class="body">
+    <div class="affichage">
+      {% if BL %}
+      <h2 class="items-list-title mb-5">
+        Bon livraison N° {{BL.id}} établi le {{BL.Date_BL}}:
+      </h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom Produit</th>
+            <th scope="col">Quantite</th>
+            <th scope="col">Prix Achat</th>
+            <th scope="col">Prix Vente</th>
+          </tr>
+        </thead> 
+        <tbody>
+          {% for item in BL_etabli %}
+          <tr>
+            <td>{{item.Produits_BL.Nom_produit}}</td>
+            <td>{{item.Qte_BL}}</td>
+            <td>{{item.Prix_HT_BL}}</td>
+            <td>{{item.Prix_Vente_BL}}</td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <span>
+        <hr />
+        <div>
+          <h4>Total prix vente : {{total_vente}}DA</h4>
+          <h4>Total prix achat : {{total_achat}}DA</h4>
+          <h4>Remise : {{BL.Remise_BL}}%</h4>
+          <h4>Prix TTC : {{prix_ttc}}DA</h4>
+          <br />
+          <a class="btn btn-danger" href="{% url 'Bon_livraison' %}">Retour</a>
+        </div>
+      </span>
+      {% endif %} {% if facture %}
+      <h2 class="items-list-title mb-5">
+        Facture N° {{facture.id}} établi le {{facture.Date_Facture}}
+      </h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom Produit</th>
+            <th scope="col">Quantite</th>
+            <th scope="col">Prix Achat</th>
+            <th scope="col">Prix Vente</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in facture_etabli %}
+          <tr>
+            <td>{{item.Produits.Nom_produit}}</td>
+            <td>{{item.Qte_Facture}}</td>
+            <td>{{item.Prix_HT_Facture}}</td>
+            <td>{{item.Prix_Vente_Facture}}</td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <span>
+        <hr />
+        <div>
+          <h4>Total prix vente : {{total_vente}}DA</h4>
+          <h4>Total prix achat : {{total_achat}}DA</h4>
+          <h4>TVA : {{facture.TVA}}%</h4>
+          <h4>Prix TTC : {{prix_ttc}}DA</h4>
+          <br />
+          <a class="btn btn-danger" href="{% url 'Bon_livraison' %}">Retour</a>
+        </div>
+      </span>
+      {% endif %} {% if commande %}
+      <h2 class="items-list-title mb-5">
+        Commande N° {{commande.id}} établi le {{commande.Date_BC}}
+      </h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom Produit</th>
+            <th scope="col">Quantite</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in commande_etabli %}
+          <tr>
+            <td>{{item.Produits_cmd.Nom_produit}}</td>
+            <td>{{item.Qte_cmd}}</td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <span>
+        <hr />
+        <div>
+          <a class="btn btn-danger" href="{% url 'Facture' %}">Retour</a>
+        </div>
+      </span>
+      {% endif %}
+    </div>
+  </body>
+</html>

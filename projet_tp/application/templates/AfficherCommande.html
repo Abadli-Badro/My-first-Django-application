@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Facture</title>
+  </head>
+
+  <body>
+    <h2>Commande N°5 {{commande.id}} établi le {{commande.Date_BC}}</h2>
+    <ul>
+      {% for item in commande_etabli %}
+      <li>
+        Nom Produit : {{item.Produits_cmd.Nom_produit}} Quantité :
+        {{item.Qte_cmd}}
+      </li>
+      {% endfor %}
+    </ul>
+    <hr />
+
+    <br />
+    <a href="{% url 'Bon_commande' %}">Retour</a>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+  </head>
+  <body class="body">
+    {% include 'header.html' %}
+    <section>
+      <div class="chart-box">
+        <canvas id="myChart"></canvas>
+      </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script>
+      var ctx = document.getElementById("myChart").getContext("2d");
+        var chart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels:  [{%for date in Dates %}"{{date.day|safe}}/{{date.month|safe}}",{% endfor %}],
+            datasets: [
+              {
+                label: "Evolution des ventes",
+                data: {{ Ventes | safe}},
+                backgroundColor: "rgba(100, 100, 180, 0.2)",
+                borderColor: "rgba(100, 100, 180, 1)",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+    </script>
+  </body>
+</html>

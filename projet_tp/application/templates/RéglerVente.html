@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  {%load static%}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    <title>Réglements</title>
+  </head>
+
+  <body class="body">
+    <div class="affichage">
+      <h1>Réglements</h1>
+      <hr />
+      {% if ventes %}
+      <h2>Les ventes non payées</h2>
+      <table class="table">
+        <thead>
+          <th>Date</th>
+          <th>Payer</th>
+        </thead>
+        {% for vente in ventes %} {% if not vente.vente_payé %}
+        <tbody>
+          <td>{{ vente.Date_Vente }}</td>
+          <td><a href="{% url 'Payer_credit' vente.id %}">Payer crédit</a></td>
+        </tbody>
+        {% endif %} {% endfor %}
+      </table>
+      {% endif %}
+      <span>
+        <hr />
+        <div>
+          <a href="{% url 'Vente' %}" class="btn btn-danger">Retour</a>
+        </div>
+      </span>
+    </div>
+  </body>
+</html>

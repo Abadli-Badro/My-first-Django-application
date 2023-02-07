@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  {%load static%}
+  <head>
+    <title>Fournisseurs</title>
+  </head>
+
+  <body>
+    {% include 'header.html' %}
+    <section>
+      <h1 class="items-list-title">Fournisseurs:</h1>
+      <div class="d-flex justify-content-between pt-2 pb-5">
+        <div class="d-flex justify-content-between">
+          <form
+            method="post"
+            class="col-auto"
+            action="{% url 'Chercher_fournisseur' %}"
+          >
+            {% csrf_token %}
+            <input
+              type="search"
+              class="col-auto btn btn-light"
+              name="fournisseur_chercher"
+              placeholder="Chercher un fournisseur"
+            />
+            <button class="btn btn-info col-auto" type="submit">
+              Chercher
+            </button>
+          </form>
+        </div>
+        <div>
+          <a class="col-auto" href="{% url 'ExpFournisseursCSV' %}">
+            <button class="btn btn-outline-primary btn-light">
+              Export(CSV)
+            </button></a
+          >
+          <a
+            class="col-auto col-auto-offset-9"
+            href="{% url 'Ajouter_fournisseur' %}"
+            ><button class="btn btn-primary btn-outline-light">
+              + Ajouter
+            </button></a
+          >
+        </div>
+      </div>
+      <hr />
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Solde</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Supprimer</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for fournisseur in fournisseurs %}
+          <tr>
+            <td>{{ fournisseur.Nom_Fournisseur }}</td>
+            <td>{{ fournisseur.Solde_Fournisseur }}</td>
+            <td>
+              <a href="{% url 'Edit_fournisseur' fournisseur.id %}">Modifier</a>
+            </td>
+            <td>
+              <a href="{% url 'Supp_fournisseur' fournisseur.id %}"
+                >Supprimer</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </body>
+</html>

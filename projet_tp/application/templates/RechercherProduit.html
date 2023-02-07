@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  {%load static%}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Recherche produit</title>
+  </head>
+  <body class="body">
+    <div class="affichage">
+      {% if produit_chercher %}
+      <h1 class="pb-4">Résultat de la recherche des produits</h1>
+      <form method="post" action="{% url 'Chercher_produit' %}">
+        {% csrf_token %}
+        <input
+          type="search"
+          name="produit_chercher"
+          class="btn"
+          placeholder="Chercher un produit"
+        />
+        <button class="btn btn-success" type="submit">Chercher</button>
+      </form>
+      <hr />
+      <table class="table">
+        <thead>
+          <th>Nom</th>
+          <th>Modifier</th>
+          <th>Supprimer</th>
+        </thead>
+        {% for produit in produits %}
+        <tr>
+          <td>{{ produit.Nom_produit }}</td>
+          <td><a href="{% url 'Edit_produit' produit.id %}">Editer</a></td>
+          <td><a href="{% url 'Supp_produit' produit.id %}">Supprimer</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      <h1>Veuillez chercher un produit!</h1>
+      <hr />
+      {% endif %}
+      <span>
+        <hr />
+        <div>
+          <a class="btn btn-danger" href="{% url 'ProdList' %}">Retour</a>
+        </div>
+      </span>
+    </div>
+  </body>
+</html>

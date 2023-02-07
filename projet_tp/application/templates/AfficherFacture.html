@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture</title>
+</head>
+
+<body>
+    <h2>Facture N° {{facture.id}} établi le {{facture.Date_Facture}}</h2>
+    <ul>
+        {% for item in facture_etabli %}
+        <li>Nom Produit : {{item.Produits.Nom_produit}} Quantité : {{item.Qte_Facture}} Prix achat : {{item.Prix_HT_Facture}} Prix vente : {{item.Prix_Vente_Facture}} </li>
+        {% endfor %}
+    </ul>
+    <hr>
+    <h2>Total prix vente : {{total_vente}}</h2>
+    <h2>Total prix achat : {{total_achat}}</h2>
+    <h2>TVA : {{facture.TVA}}%</h2>
+    <h2>Remise : {{facture.Remise_Facture}}%</h2>
+    <h2>Prix TTC : {{prix_ttc}}</h2>
+    <br>
+    <a href="{% url 'Facture' %}">Retour</a>
+</body>
+
+</html>

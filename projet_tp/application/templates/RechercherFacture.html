@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body class="body">
+    {% if facture_chercher %}
+    <h1>Résultat de la recherche des factures</h1>
+    <form method="post" action="{% url 'Chercher_facture' %}">
+        {% csrf_token %}
+        <input type="search" required name="facture_chercher" placeholder="Chercher une facture par id">
+        <button type="submit">Chercher</button>
+    </form>
+    <hr>
+    
+    <li>Facture N°{{ factures.id }} || {{factures.Date_Facture}} <a href="{% url 'Afficher_facture' factures.id %}">Afficher</a> <a href="{% url 'Edit_facture' factures.id %}">Editer</a> <a href="{% url 'supp_facture' factures.id %}">Supprimer</a></li>
+    {% else %}
+    <h1>Veuillez chercher une facture!</h1>
+    <hr>
+    {% endif %}
+
+</body>
+
+</html>

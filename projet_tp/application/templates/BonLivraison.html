@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  {% load static %}
+  <head>
+    <title>Bon de livraison</title>
+  </head>
+
+  <body>
+    {% include 'header.html' %}
+    <section>
+      <h1 class="items-list-title">Bon de livraison:</h1>
+      <div class="d-flex justify-content-between pt-2 pb-5">
+        <div class="d-flex justify-content-between">
+          <form method="post" class="col-auto" action="{% url 'Chercher_BL' %}">
+            {% csrf_token %}
+            <input
+              type="search"
+              required
+              name="BL_chercher"
+              class="col-auto btn btn-light"
+              placeholder="Chercher un BL par id"
+            />
+            <button class="btn btn-info col-auto" type="submit">
+              Chercher
+            </button>
+          </form>
+          <form method="get">
+            {% csrf_token %} {{bons.form}}
+            <button class="btn btn-success" type="submit">Filter</button>
+          </form>
+        </div>
+        <div>
+          <a class="col-auto col-auto-offset-9" href="{% url 'Ajouter_BL' %}"
+            ><button class="btn btn-primary btn-outline-light">
+              + Ajouter
+            </button></a
+          >
+        </div>
+      </div>
+      <hr />
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Afficher</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Supprimer</th>
+            <th scope="col">PDF</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for bon in bons.qs %}
+          <tr>
+            <td>{{bon.Date_BL}}</td>
+            <td>
+              <a href="{% url 'Afficher_BL' bon.id %}">Afficher</a>
+            </td>
+            <td>
+              <a href="{% url 'Edit_bon_livraison' bon.id %}">Editer</a>
+            </td>
+            <td>
+              <a href="{% url 'supp_BL' bon.id %}">Supprimer</a>
+            </td>
+            <td>
+              <a href="{% url 'ExpBL' bon.id %}">Export</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </body>
+</html>

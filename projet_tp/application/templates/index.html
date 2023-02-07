@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  {%load static%}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body class="body">
+    {% include 'header.html' %}
+    <section>
+      <div class="landing-home">
+        <div class="landing-text">
+          <img src={% static 'logo.jpg' %}/>
+          <h2>Nomad Store</h2>
+          <h6>
+            Vous souhaitez vendre vos produits en ligne? C'est rapide et facile
+            avec Nomad Store! Puissant et Adaptable à tous les projets
+            e-commerce.
+          </h6>
+        </div>
+        <div class="bottom-heart mt-5">
+          <div>
+            <h3>Most used features</h3>
+            <div class="features-box row"></div>
+          </div>
+          <div class="favoris-form">
+            <select name="cars" id="cars"></select>
+            <button id="addButton" class="btn btn-primary">Ajouter</button>
+            <button id="deleteButton" class="btn btn-primary">Supprimez</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script src="{% static 'js/favoris.js' %}"></script>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+  </head>
+  <body class="body">
+    {% include 'header.html' %}
+    <section>
+      <div class="chart-box">
+        <canvas id="best-products"></canvas>
+      </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script>
+      new Chart(document.getElementById("best-products").getContext("2d"), {
+          type: "bar",
+          data: {
+            labels: {{ Noms| safe}},
+            datasets: [
+              {
+                label: "Quantité vendu",
+                data: {{ Nombre| safe}},
+                backgroundColor: [
+                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(255, 159, 64, 0.2)",
+                  "rgba(255, 159, 64, 0.2)",
+                  "rgba(255, 205, 86, 0.2)",
+                  "rgba(255, 205, 86, 0.2)",
+                  "rgba(75, 192, 192, 0.2)",
+                ],
+                borderColor: [
+                  "rgb(255, 99, 132)",
+                  "rgb(255, 99, 132)",
+                  "rgb(54, 162, 235)",
+                  "rgb(153, 102, 255)",
+                  "rgb(153, 102, 255)",
+                  "rgb(201, 203, 207)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+    </script>
+  </body>
+</html>

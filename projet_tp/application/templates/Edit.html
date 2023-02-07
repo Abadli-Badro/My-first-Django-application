@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Document</title>
+  </head>
+
+  <body class="body">
+    <div class="form-page">
+      <h3 class="pb-4">Edit:</h3>
+      <form method="POST">
+        {% csrf_token %} {{ form.as_p}} {% if produit %}
+        <div>
+          <a href=" {% url 'ProdList' %}" class="btn btn-danger">Annuler</a>
+          {% endif %} {% if fournisseur %}
+          <a href=" {% url 'FournisseursList' %}" class="btn btn-danger"
+            >Annuler</a
+          >
+          {% endif %} {% if stock %}
+          <a href=" {% url 'Stock' %}" class="btn btn-danger">Annuler</a>
+          {% endif %} {% if type %}
+          <a href=" {% url 'TypeList' %}" class="btn btn-danger">Annuler</a>
+          {% endif %} {% if client %}
+          <a href=" {% url 'ClientList' %}" class="btn btn-danger">Annuler</a>
+          {% endif %} {% if facture %}
+          <a href=" {% url 'Facture' %}" class="btn btn-danger">Annuler</a>
+          {% endif %} {% if BL %}
+          <a href=" {% url 'Bon_livraison' %}" class="btn btn-dnager"
+            >Annuler</a
+          >
+          {% endif %} {% if commande %}
+          <a href=" {% url 'Bon_commande' %}" class="btn btn-danger">Annuler</a>
+          {% endif %}
+          <!-- pour revenir en arrière et annuler la modification -->
+          <input class="btn btn-success" type="submit" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

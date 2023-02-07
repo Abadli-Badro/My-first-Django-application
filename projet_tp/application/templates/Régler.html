@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  {%load static%}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Réglements</title>
+  </head>
+
+  <body class="body">
+    <div class="affichage">
+      <h1>Réglements</h1>
+      <hr />
+
+      {% if factures %}
+
+      <h2>Les factures non payées</h2>
+      <table class="table">
+        <thead>
+          <th>Date</th>
+          <th>Fournisseur</th>
+          <th>Regler</th>
+        </thead>
+        {% for facture in factures %} {% if not facture.facture_payé %}
+        <tr>
+          <td>{{ facture.Date_Facture }}</td>
+
+          <td>{{facture.Fournisseurs.Nom_Fournisseur}}</td>
+          <td>
+            <a href="{% url 'Régler_facture' facture.id %}">Payer facture</a>
+          </td>
+        </tr>
+        {% endif %} {% endfor %}
+      </table>
+      {% endif %}
+      <br />
+      {% if bls %}
+      <h2>Les bons de livraison non payées</h2>
+      <table class="table">
+        <thead>
+          <th>Date</th>
+          <th>Fournisseur</th>
+          <th>massi</th>
+        </thead>
+        {% for bl in bls %} {% if not bl.BL_payé %}
+        <tbody>
+          <tr>
+            <td>{{ bl.Date_BL }}</td>
+              <td>{{bl.Fournisseurs.Nom_Fournisseur}}</td>
+              <td><a href="{% url 'Régler_BL' bl.id %}">Payer le bon</a></td>
+            </li>
+          </tr>
+        </tbody>
+        {% endif %} {% endfor %}
+      </table>
+      {% endif %}
+      <span>
+        <hr />
+        <div>
+          <a class="btn btn-danger" href="{% url 'Réglements_achat' %}">Retour</a>
+        </div>
+      </span>
+    </div>
+  </body>
+</html>

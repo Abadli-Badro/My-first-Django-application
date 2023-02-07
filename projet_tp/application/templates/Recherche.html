@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+
+    <form method="post" action="{% url 'Chercher_commande' %}">
+        {% csrf_token %}
+        <input type="search" required name="commande_chercher" placeholder="Chercher une commande par id">
+        <button type="submit">Chercher</button>
+    </form>
+    <hr>
+    {% if commande_chercher %}
+    <h1>Résultat de la recherche des commandes</h1>
+    <hr>
+    <li>Commande N°{{ commandes.id }} || Fournisseur {{ commandes.Fournisseur }} <a
+            href="{% url 'Afficher_commande' commandes.id %}">Afficher</a> <a
+            href="{% url 'Edit_commande' commandes.id %}">Editer</a> <a
+            href="{% url 'supp_commande' commandes.id %}">Supprimer</a></li>
+    {% else %}
+    <h1>Veuillez chercher une commande!</h1>
+    <hr>
+    {% endif %}
+    {% endif %}
+
+
+
+    <a href="{% url 'Home' %}">Home</a>
+</body>
+
+</html>

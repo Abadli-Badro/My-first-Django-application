@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  {%load static%}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Etablire Facture</title>
+  </head>
+
+  <body class="body">
+    <div class="form-page">
+      <h3>Chercher le produit à ajouter :</h3>
+      <hr />
+      <form method="post" action="">
+        {% csrf_token %}
+        <input
+          type="search"
+          name="produit_chercher"
+          class="form-control mb-2"
+          required
+          placeholder="Nom de produit"
+        />
+        {% csrf_token %}
+        <input
+          type="number"
+          name="quantite"
+          class="form-control mb-2"
+          min="1"
+          required
+          placeholder="QTE"
+        />
+        {% for msg in messages %} {% if msg.level == 20 %}
+      <a href="{% url 'Afficher_vente' pk %}">{{msg}}</a>
+      {% else %}
+      <p>{{msg}}</p>
+      {% endif %} {% endfor %}
+      <br />
+      {% if produits %}
+      <ul>
+        {% for produit in produits %}
+        <li>
+          {{ produit.Nom_produit }} || {{produit.Prix_Vente_Produit}}DA || QTE
+          :{{produit.Qte_stocker}}
+          <a href="{% url 'Effectuer_Vente' produit.id %}">Ajouter</a>
+          {% endfor %}
+        </li>
+      </ul>
+
+      {% endif %}
+        <div class="d-flex justify-content-evenly">
+          <a class="btn btn-danger" href="{% url 'Vente' %}">Retour</a>
+          <button class="btn btn-success" type="submit">Chercher</button>
+        </div>
+      </form>
+      <br />
+      
+    </div>
+  </body>
+</html>

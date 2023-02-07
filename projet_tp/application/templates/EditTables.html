@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editer</title>
+</head>
+
+<body>
+    {% if produit %}
+    <h1>Editer un produit</h1>
+    <br>
+    <a href="{% url 'ProdList' %}">Retour vers la liste des produits</a>
+    {% endif %}
+
+    {% if client %}
+    <h1>Editer un client</h1>
+    <br>
+    <a href="{% url 'ClientList' %}">Retour vers la liste des clients</a>
+    {% endif %}
+
+    {% if fournisseur %}
+    <h1>Editer un fournisseur</h1>
+    <br>
+    <a href="{% url 'FournisseursList' %}">Retour vers la liste des fournisseurs</a>
+    {% endif %}
+
+    {% if type %}
+    <h1>Editer un type</h1>
+    <br>
+    <a href="{% url 'TypeList' %}">Retour vers la liste des types</a>
+    {% endif %}
+
+    {% if stock %}
+    <h4>Editer un stock</h4>
+    <br>
+    <a href="{% url 'Stock' %}">Retour vers la liste des stocks</a>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Editer">
+    </form>
+    <p> {{message}} </p>
+
+</body>
+
+</html>
